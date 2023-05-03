@@ -68,8 +68,9 @@ Your choice: angry
   THUNDERY_HEAVY_RAIN = 389
   THUNDERY_SNOW_SHOWERS = 392
   
-## How to start the app
-Open the terminal, 
-pip3 install -r requirements.txt
-python3 main.py
-Web will run on http://localhost:8080
+## Setting up
+
+Open the terminal,  //
+pip3 install -r requirements.txt//
+python3 main.py//
+Web will run on http://localhost:8080//
