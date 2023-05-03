@@ -8,6 +8,15 @@
   src: url("font/SansitaOne.ttf");
 }
 
+.motivation {
+  background-color: #ffe066;
+  overflow: auto;
+  max-height: 100vh;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 0px;
+}
+
 .go-spotify {
   font-family: Sanista;
 }
@@ -24,8 +33,13 @@ a:active {
   height: 200px;
 }
 
+.container-form {
+  margin-top: 40px;
+  margin-left: 40px;
+}
+
 .form-container {
-  margin-top: 70px;
+  margin-top: 50px;
   margin-left: 70px;
 }
 

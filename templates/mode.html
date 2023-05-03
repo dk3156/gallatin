@@ -45,21 +45,33 @@
             class="u-align-left u-container-style u-layout-cell u-right-cell u-size-25 u-layout-cell-2"
           >
             <div class="form-container">
-              <form action="/submit" method="post">
-                <h1 class="font-montserrat">Type your spotify user id</h1>
-                <br />
-                <div class="input-box">
+              <form action="/submit_mode" method="post">
+                <h1 class="font-montserrat">Choose your song preference</h1>
+                <div class="custom-control custom-radio custom-control-inline">
                   <input
-                    type="text"
-                    class="form-control"
-                    id="userID"
-                    name="userID"
-                    aria-describedby="basic-addon3"
-                  /><br />
+                    type="radio"
+                    id="mode1"
+                    name="mode"
+                    value="random"
+                    class="custom-control-input"
+                  />
+                  <label class="custom-control-label" for="customRadioInline1"
+                    >Random songs</label
+                  >
                 </div>
-                <p class="font-montserrat">
-                  Once authorized, paste redirect url on the terminal.<br />
-                </p>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input
+                    type="radio"
+                    id="mode2"
+                    name="mode"
+                    value="user"
+                    class="custom-control-input"
+                  />
+                  <label class="custom-control-label" for="customRadioInline2"
+                    >Songs in my library</label
+                  >
+                </div>
+                <br />
                 <button type="submit" class="btn btn-warning">Submit</button>
               </form>
             </div>

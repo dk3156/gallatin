@@ -101,6 +101,7 @@ def create_playlist(sp, mood, user, tracks):
 
 
 def main(sp, user, model, mood, size=15, mode="random"):
+    print(size)
     match mode.lower():
         case "random":
             tracks = get_random_mood_tracks(sp, mood, model, size)

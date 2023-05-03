@@ -75,18 +75,9 @@ def get_mood(weather):
             mood = "happy"
     return mood
 
-def main(username):
+def auth(username):
     # see https://stackoverflow.com/questions/45600579/asyncio-event-loop-is-closed-when-getting-loop
     # for more details
-    if os.name == "nt":
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-
-    location = "New York"
-    weather = asyncio.run(getweather(location))
-    mood = get_mood(weather)
-    print(weather.current.feels_like)
-    print(weather.current.kind)
-    print(mood)
 
     scopes = (
         "user-read-recently-played"
@@ -120,15 +111,28 @@ def main(username):
 									client_secret=CLIENT_SECRET,
 									redirect_uri='http://google.com/')
         
-    if token:
-        sp = spotipy.Spotify(auth=token)
-        user = sp.current_user()
-        model = learnSongs.main()
-        createPlaylist.main(sp, user, model, mood, size=5)
+    return token
+
+def generate_playlist(token, city, mood, count, usermode):
+    
+    if os.name == "nt":
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    
+    weather = asyncio.run(getweather(city))
+    if mood == "random":
+        mood = get_mood(weather)
+    try:
+        size = int(count)
+    except:
+        print("Count is not a intger: ", count)
+        size = 1
+    mode = usermode
+    sp = spotipy.Spotify(auth=token)
+    user = sp.current_user()
+    model = learnSongs.main()
+    
+    try:
+        createPlaylist.main(sp, user, model, mood, size, mode)
         return True
-    else:
+    except Exception:
         return False
-
-
-if __name__ == "__main__":
-    main()

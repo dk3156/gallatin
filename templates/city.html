@@ -45,21 +45,21 @@
             class="u-align-left u-container-style u-layout-cell u-right-cell u-size-25 u-layout-cell-2"
           >
             <div class="form-container">
-              <form action="/submit" method="post">
-                <h1 class="font-montserrat">Type your spotify user id</h1>
-                <br />
+              <form action="/submit_city" method="post">
+                <h1 class="font-montserrat">Tell us your city</h1>
+                <p class="font-montserrat">
+                  Your location info will help us to generate better songs for
+                  you! Leave the box empty otherwise.
+                </p>
                 <div class="input-box">
                   <input
                     type="text"
                     class="form-control"
-                    id="userID"
-                    name="userID"
+                    id="city"
+                    name="city"
                     aria-describedby="basic-addon3"
                   /><br />
                 </div>
-                <p class="font-montserrat">
-                  Once authorized, paste redirect url on the terminal.<br />
-                </p>
                 <button type="submit" class="btn btn-warning">Submit</button>
               </form>
             </div>
