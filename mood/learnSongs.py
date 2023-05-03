@@ -34,14 +34,14 @@ Returns a tuple of numpy arrays X_train, X_validation, Y_train, Y_validation
 as numpy arrays. It uses a random_state start seed of 100. 
 '''
 def splitDataset(dataset, seed, scoring):
-	array = dataset.values
-	X = array[:,1:4]
-	Y = array[:,4]
-	validation_size = 0.20
-	X_train, X_validation, Y_train, Y_validation = model_selection.train_test_split(X, Y,
-												   test_size=validation_size,
-												   random_state=seed)
-	return X_train, X_validation, Y_train, Y_validation
+    array = dataset.values
+    X = array[:,1:4]
+    Y = array[:,4]
+    validation_size = 0.20
+    X_train, X_validation, Y_train, Y_validation = model_selection.train_test_split(X, Y,
+                                                   test_size=validation_size,
+                                                   random_state=seed)
+    return X_train, X_validation, Y_train, Y_validation
 
 '''
 Tries different classifiers and see which one performs the best. Tries
@@ -52,35 +52,35 @@ result scores. It will also create a graph that shows the difference in the algo
  performance. This function is intended to be used to pick the best classifier to use. 
 '''
 def tryClassifiers(X_train, Y_train, seed, scoring):
-	models = []
-	models.append(('Linear Discriminant Analysis', LinearDiscriminantAnalysis()))
-	models.append(('K Neighbors', KNeighborsClassifier()))
-	models.append(('Decision Tree', DecisionTreeClassifier()))
-	models.append(('Logistic Regression', LogisticRegression(solver='liblinear',
-															 multi_class='ovr')))
-	models.append(('Support Vector Machine', SVC(gamma='auto')))
-	models.append(('Gaussian Naive Bayes', GaussianNB()))
+    models = []
+    models.append(('Linear Discriminant Analysis', LinearDiscriminantAnalysis()))
+    models.append(('K Neighbors', KNeighborsClassifier()))
+    models.append(('Decision Tree', DecisionTreeClassifier()))
+    models.append(('Logistic Regression', LogisticRegression(solver='liblinear',
+                                                             multi_class='ovr')))
+    models.append(('Support Vector Machine', SVC(gamma='auto')))
+    models.append(('Gaussian Naive Bayes', GaussianNB()))
 
-	#Try each model and print out the results of the scores of each one
-	results = []
-	names = []
-	for name, model in models:
-		kfold = model_selection.KFold(n_splits=10, random_state=seed)
-		cv_results = model_selection.cross_val_score(model, X_train, Y_train, cv=kfold, scoring=scoring)
-		results.append(cv_results)
-		names.append(name)
-		mean = cv_results.mean()
-		stdDev = cv_results.std()
-		msg = "%s: %f (%f)" % (name, mean, stdDev)
-		print(msg)
+    #Try each model and print out the results of the scores of each one
+    results = []
+    names = []
+    for name, model in models:
+        kfold = model_selection.KFold(n_splits=10, random_state=seed)
+        cv_results = model_selection.cross_val_score(model, X_train, Y_train, cv=kfold, scoring=scoring)
+        results.append(cv_results)
+        names.append(name)
+        mean = cv_results.mean()
+        stdDev = cv_results.std()
+        msg = "%s: %f (%f)" % (name, mean, stdDev)
+        print(msg)
 
-	#Create graph that will show differences in algorithm performance
-	figure = plt.figure()
-	figure.suptitle('Differences in Algorithm Performance')
-	ax = figure.add_subplot(111)
-	plt.boxplot(results)
-	ax.set_xticklabels(names)
-	plt.show()
+    #Create graph that will show differences in algorithm performance
+    figure = plt.figure()
+    figure.suptitle('Differences in Algorithm Performance')
+    ax = figure.add_subplot(111)
+    plt.boxplot(results)
+    ax.set_xticklabels(names)
+    plt.show()
 
 '''
 Fits model to 80% training data.
@@ -90,37 +90,31 @@ confusion matrix, and classification report for the passed in model.
 It will return the trained model. 
 '''
 def checkModel(model, X_train, Y_train, X_validation, Y_validation):
-	model.fit(X_train, Y_train)
-	predictions = model.predict(X_validation)
-	#print(accuracy_score(Y_validation, predictions))
-	#print(confusion_matrix(Y_validation, predictions))
-	#print(classification_report(Y_validation, predictions))
-	return model
+    model.fit(X_train, Y_train)
+    predictions = model.predict(X_validation)
+    #print(accuracy_score(Y_validation, predictions))
+    #print(confusion_matrix(Y_validation, predictions))
+    #print(classification_report(Y_validation, predictions))
+    return model
 
 '''
 Returns model that has been trained on the training dataset. The classifier
 being used is a decision tree. 
 '''
 def main():
-	# Load dataset
-	dataset = pandas.read_csv("songMoods.csv",
-	 						  names=['id','danceability', 'energy', 
-	 						  		 'valence', 'mood'])
-	seed = 100
-	scoring = 'accuracy'
-	#split dataset into training and validation data
-	X_train, X_validation, Y_train, Y_validation = splitDataset(dataset, seed, scoring)
-	#try multiple classifiers and print data on how well they perform
-	#tryClassifiers(X_train, Y_train, seed, scoring)
-	#chose model based on results
-	chosenModel =  LogisticRegression(solver='liblinear',
-									  multi_class='ovr')
-	model = checkModel(chosenModel, X_train, Y_train,
-					   X_validation, Y_validation)
-	return model
-
-
-
-
-
-
+    # Load dataset
+    dataset = pandas.read_csv("songMoods.csv",
+                               names=['id','danceability', 'energy', 
+                                        'valence', 'mood'])
+    seed = 100
+    scoring = 'accuracy'
+    #split dataset into training and validation data
+    X_train, X_validation, Y_train, Y_validation = splitDataset(dataset, seed, scoring)
+    #try multiple classifiers and print data on how well they perform
+    #tryClassifiers(X_train, Y_train, seed, scoring)
+    #chose model based on results
+    chosenModel =  LogisticRegression(solver='liblinear',
+                                      multi_class='ovr')
+    model = checkModel(chosenModel, X_train, Y_train,
+                       X_validation, Y_validation)
+    return model
