@@ -11,10 +11,15 @@
 ### Installation
 
 1. Clone the repository
-2. Install the prerequisites with `pip install -r requirements.txt`
-3. Run the command `python gallatin.py USERID` where `USERID` is the Spotify user id of the user you want to generate a playlist for
+2. Open the terminal,  install prerequisites with `pip3 install -r requirements.txt`
+3. Run app with `python3 main.py`
+4. Web will run on http://localhost:8080
+5. When prompted, type Spotify UserID
    1. The user ID for the test account is `31zmbimflej3gpsj3yxpwpm4qeyy`
-4. The new playlist will be generated in the user's Spotify account
+6. ClientID and Secret Key values in gallatin.py MUST match with those in user's spotify dashboard setting
+7. Copy and paste the redirect url on the terminal, when prompted "Enter the redirect url"
+8. Choose options for playlist
+9. Check spotify playlist panels!
 
 ## Test User
 
@@ -68,9 +73,4 @@ Your choice: angry
   THUNDERY_HEAVY_RAIN = 389
   THUNDERY_SNOW_SHOWERS = 392
   
-## Setting up
 
-Open the terminal,  <br>
-pip3 install -r requirements.txt <br>
-python3 main.py <br>
-Web will run on http://localhost:8080
